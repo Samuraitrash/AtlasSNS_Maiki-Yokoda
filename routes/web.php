@@ -42,3 +42,4 @@ Route::get('/follower-list','PostsController@index');
 
 
 //ログイン後のページ
+Route::post('/top','PostsController@index');
