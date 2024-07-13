@@ -23,6 +23,7 @@
 Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
 
+//新規登録
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
 
@@ -43,3 +44,8 @@ Route::get('/follower-list','PostsController@index');
 
 //ログイン後のページ
 Route::post('/top','PostsController@index');
+
+
+
+//ログアウト
+Route::get('/logout', 'Auth\LoginController@logout');

@@ -14,7 +14,7 @@ class RegisterController extends Controller
     | Register Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users as well as their
+    | This controller handles the registration f new users as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
@@ -39,8 +39,15 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
     public function register(Request $request){
         if($request->isMethod('post')){
+            $data = $request->all();
+            $request -> validate([
+                'username' => ['required', 'string', 'min:2','max:12'],
+                'mail' => ['required', 'string', 'min:5', 'max:40',],
+                'password' => ['required', 'string', 'alpha_dash', 'min:8', 'max:20', 'confirmed',]
+            ]);
 
             $username = $request->input('username');
             $mail = $request->input('mail');
@@ -52,11 +59,11 @@ class RegisterController extends Controller
                 'password' => bcrypt($password),
             ]);
 
-            return redirect('added');
+            $input = $request->session()->put('username',$username);
+            return redirect('added')->with('username', $username);
         }
         return view('auth.register');
     }
-
     public function added(){
         return view('auth.added');
     }
