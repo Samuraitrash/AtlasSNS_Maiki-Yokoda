@@ -11,6 +11,10 @@ class UsersController extends Controller
         return view('users.profile');
     }
     public function search(){
+        $users = User::all();
         return view('users.search');
+    }
+    public function searching(Request $request){
+
     }
 }
